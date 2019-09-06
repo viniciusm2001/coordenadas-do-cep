@@ -1,0 +1,17 @@
+{
+  "name": "coordenadas-do-cep",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["conseguir", "buscar", "transformar", "em", "o","do", "de", "um", "as", "para", "a", "cep", "e", "converter","coordenadas", "lat", "latitude", "lon", "longitude"],
+  "author": "Vinicius M.",
+  "license": "Eiffel Forum License, version 2",
+  "dependencies": {
+    "is-html": "^2.0.0",
+    "request": "^2.88.0",
+    "round-to": "^4.0.0"
+  }
+}
