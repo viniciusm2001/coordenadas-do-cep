@@ -6,13 +6,15 @@ const isHtml = require("is-html");
 class CoordenadasDoCep {
 
    static setOpcoes(opcoes){
+      const { busca_aproximada, precisao } = opcoes;
       
-      if(typeof opcoes.busca_aproximada == 'boolean'){
-         this.busca_aproximada = opcoes.busca_aproximada;
-      }
+      this.busca_aproximada = typeof busca_aproximada == 'boolean' ? busca_aproximada : true;
+      this.precisao = typeof precisao == 'number' ? precisao : 4;
    }
 
 	static getByEndereco(endereco, callback){
+
+      const precisao = typeof this.precisao == 'number' ? this.precisao : 4;  
 
       endereco = encodeURI(endereco);
 
@@ -51,8 +53,8 @@ class CoordenadasDoCep {
                let { lat, lon } = dados_endereco[0];
    
                const coords = {
-                  lat:round(parseFloat(lat), 4), 
-                  lon:round(parseFloat(lon), 4) 
+                  lat:round(parseFloat(lat), precisao), 
+                  lon:round(parseFloat(lon), precisao) 
                }
 
                callback(null, coords);
@@ -96,10 +98,7 @@ class CoordenadasDoCep {
    }
 
    static getByCep(cep, callback){
-
-      if(typeof this.busca_aproximada != 'boolean'){
-         this.busca_aproximada = true;
-      }
+      const busca_aproximada = typeof this.busca_aproximada == 'boolean' ? this.busca_aproximada : true;
       
       //PEGA AS INFORMAÇÕES DO CEP DIGITADO
       this.getInfoCep(cep, (err, info_cep)=>{
@@ -124,7 +123,7 @@ class CoordenadasDoCep {
                if(err){
                   //CASO NÃO SEJA ENCONTRADO O ENDEREÇO USANDO-O COMPLETO
                   //ELE SERÁ BUSCADO USANDO O ENDEREÇO APROXIMANDO
-                  if(this.busca_aproximada){
+                  if(busca_aproximada){
                      if(err == 404){
 
                         this.getByEndereco(endereco_aprox, (err, coords)=>{
