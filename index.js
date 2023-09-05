@@ -83,7 +83,7 @@ class CoordenadasDoCep {
             headers: {
                'User-Agent': 'coordenadas-do-cep-npm-module'
             },
-            path: "/search?country=Brazil&q=" + endereco + "&format=json&limit=1"
+            path: "/search.php?q=" + endereco + "&format=json&limit=1"
          };
 
          try{
